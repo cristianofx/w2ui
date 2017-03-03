@@ -1,3 +1,6 @@
+## THIS FORK IS FOR CUSTOMIZATION WITH SOME BUG FIXES
+
+
 ## W2UI 1.5 - MIT License
 
 W2UI is modern, intuitive JavaScript UI library for building rich data-driven web application. The library has
