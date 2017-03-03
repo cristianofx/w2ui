@@ -1703,6 +1703,7 @@
             var sel = this.getSelection();
             if (sel.length == 1) this.toolbar.enable('w2ui-edit'); else this.toolbar.disable('w2ui-edit');
             if (sel.length >= 1) this.toolbar.enable('w2ui-delete'); else this.toolbar.disable('w2ui-delete');
+            this.status();
             this.addRange('selection');
             $('#grid_'+ this.name +'_check_all').prop('checked', true);
             // event after
@@ -1734,6 +1735,7 @@
             sel.indexes = [];
             sel.columns = {};
             this.toolbar.disable('w2ui-edit', 'w2ui-delete');
+            this.status();
             this.removeRange('selection');
             $('#grid_'+ this.name +'_check_all').prop('checked', false);
             // event after
