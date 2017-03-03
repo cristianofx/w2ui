@@ -2111,44 +2111,45 @@
                     $('#grid_' + this.name + '_field_' + i).css('border', 'silver solid 1px');
                 }
 
-            //// event before
-            var edata = this.trigger({ phase: 'before', type: 'search', reset: true, target: this.name, searchData: searchData });
-            if (edata.isCancelled === true) return;
-            // default action
-            this.searchData = edata.searchData;
-            this.last.search = '';
-            this.last.logic = (hasHiddenSearches ? 'AND' : 'OR');
-            // --- do not reset to All Fields (I think)
-            if (this.searches.length > 0) {
-                if (!this.multiSearch || !this.show.searchAll) {
-                    var tmp = 0;
-                    while (tmp < this.searches.length && (this.searches[tmp].hidden || this.searches[tmp].simple === false)) tmp++;
-                    if (tmp >= this.searches.length) {
-                        // all searches are hidden
-                        this.last.field = '';
-                        this.last.caption = '';
+                //// event before
+                var edata = this.trigger({ phase: 'before', type: 'search', reset: true, target: this.name, searchData: searchData });
+                if (edata.isCancelled === true) return;
+                // default action
+                this.searchData = edata.searchData;
+                this.last.search = '';
+                this.last.logic = (hasHiddenSearches ? 'AND' : 'OR');
+                // --- do not reset to All Fields (I think)
+                if (this.searches.length > 0) {
+                    if (!this.multiSearch || !this.show.searchAll) {
+                        var tmp = 0;
+                        while (tmp < this.searches.length && (this.searches[tmp].hidden || this.searches[tmp].simple === false)) tmp++;
+                        if (tmp >= this.searches.length) {
+                            // all searches are hidden
+                            this.last.field = '';
+                            this.last.caption = '';
+                        } else {
+                            this.last.field = this.searches[tmp].field;
+                            this.last.caption = this.searches[tmp].caption;
+                        }
                     } else {
-                        this.last.field = this.searches[tmp].field;
-                        this.last.caption = this.searches[tmp].caption;
+                        this.last.field = 'all';
+                        this.last.caption = w2utils.lang('All Fields');
                     }
-                } else {
-                    this.last.field = 'all';
-                    this.last.caption = w2utils.lang('All Fields');
                 }
+                this.last.multi = false;
+                this.last.xhr_offset = 0;
+                // reset scrolling position
+                this.last.scrollTop = 0;
+                this.last.scrollLeft = 0;
+                this.last.selection.indexes = [];
+                this.last.selection.columns = {};
+                //// -- clear all search field
+                $('#grid_' + this.name + '_search_all').removeData('selected').val('');
+                // apply search
+                if (!noRefresh) this.reload();
+                // event after
+                this.trigger($.extend(edata, { phase: 'after' }));
             }
-            this.last.multi = false;
-            this.last.xhr_offset = 0;
-            // reset scrolling position
-            this.last.scrollTop = 0;
-            this.last.scrollLeft = 0;
-            this.last.selection.indexes = [];
-            this.last.selection.columns = {};
-            //// -- clear all search field
-            $('#grid_' + this.name + '_search_all').removeData('selected').val('');
-            // apply search
-            if (!noRefresh) this.reload();
-            // event after
-            this.trigger($.extend(edata, { phase: 'after' }));
         },
 
         searchShowFields: function () {
