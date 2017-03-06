@@ -2527,6 +2527,9 @@
             } else {
                 this.scroll();
                 this.resize();
+                if ($('input#grid_' + this.name + '_check_all:checked').length > 0) {
+                    this.selectAll();
+                }
             }
             // call back
             if (typeof callBack == 'function') callBack(data); // need to be befor event:after
