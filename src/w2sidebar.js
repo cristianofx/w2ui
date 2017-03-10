@@ -340,7 +340,7 @@
             this.unselect(this.selected);
             $(this.box).find('#node_'+ w2utils.escapeId(id))
                 .addClass('w2ui-selected')
-                .find('.w2ui-icon').addClass('w2ui-icon-selected');
+                .find('.w2ui-icon').addClass('');
             new_node.selected = true;
             this.selected = id;
             return true;
@@ -458,7 +458,7 @@
             // select new one
             var newNode = $(obj.box).find('#node_'+ w2utils.escapeId(id));
             var oldNode = $(obj.box).find('#node_'+ w2utils.escapeId(obj.selected));
-            newNode.addClass('w2ui-selected').find('.w2ui-icon').addClass('w2ui-icon-selected');
+            newNode.addClass('w2ui-selected').find('.w2ui-icon');
             // need timeout to allow rendering
             setTimeout(function () {
                 // event before
@@ -466,7 +466,7 @@
                 if (edata.isCancelled === true) {
                     // restore selection
                     newNode.removeClass('w2ui-selected').find('.w2ui-icon').removeClass('w2ui-icon-selected');
-                    oldNode.addClass('w2ui-selected').find('.w2ui-icon').addClass('w2ui-icon-selected');
+                    oldNode.addClass('w2ui-selected').find('.w2ui-icon');
                     return;
                 }
                 // default action
@@ -872,7 +872,7 @@
                 } else {
                     if (nd.selected && !nd.disabled) obj.selected = nd.id;
                     tmp = '';
-                    if (img) tmp  = '<div class="w2ui-node-image w2ui-icon '+ img +    (nd.selected && !nd.disabled ? " w2ui-icon-selected" : "") +'"></div>';
+                    if (img) tmp  = '<div class="w2ui-node-image w2ui-icon '+ img +    (nd.selected && !nd.disabled ? "" : "") +'"></div>';
                     if (icon) tmp = '<div class="w2ui-node-image"><span class="'+ icon +'"></span></div>';
                     var text = nd.text;
                     if (typeof nd.text == 'function') text = nd.text.call(obj, nd);
