@@ -883,11 +883,8 @@
             }
             // color
             if (this.type == 'color') {
-                var color = $(this.el).val();
-                if (color.substr(0, 3).toLowerCase() != 'rgb') {
-                    color = '#' + color;
-                    if ($(this.el).val().length != 6 && $(this.el).val().length != 3) color = '';
-                }
+                var color = '#' + $(this.el).val();
+                if ($(this.el).val().length != 6 && $(this.el).val().length != 3) color = '';
                 $(this.el).next().find('div').css('background-color', color);
                 if ($(obj.el).is(':focus')) this.updateOverlay();
             }
